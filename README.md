@@ -1,5 +1,3 @@
-# VertexModel
-
 # Modeling and Simulation of Vertex models in C++
 
 This repository hosts the source files for the "Modeling and Simulation in Vertex models in C++" website. It serves as a documentation of computationally modelling cell alignment in C++
@@ -16,7 +14,7 @@ This project provides a static website documenting my journey of computationally
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the GNU License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
