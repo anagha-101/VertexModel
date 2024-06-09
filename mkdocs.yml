@@ -1,6 +1,8 @@
 site_name: Modeling and Simulation in C++
 theme:
   name: 'material'
+  palette:
+    scheme: slate
 nav:
   - Home: index.md
   - Chapter 1: chapter1.md

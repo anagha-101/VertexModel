@@ -123,8 +123,7 @@ int main(){
 
 
 
-![a image of the cell](/images/cell_plotimage.png)
-
+![a image of the cell](../images/cell_plotimage.png)
 
 ## Eigen library in c++
 
