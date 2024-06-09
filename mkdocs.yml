@@ -1,0 +1,7 @@
+site_name: Modeling and Simulation in C++
+theme:
+  name: 'material'
+nav:
+  - Home: index.md
+  - Chapter 1: chapter1.md
+  - Chapter 2: chapter2.md
