@@ -1,6 +1,30 @@
 # Concepts of C++ that you must know for this project!
 
 ## Object Oriented Programming - C++ Class
+A C++ class is a blueprint for creating objects. It encapsulates data for the object and methods to manipulate that data. Classes define the properties (data members) and behaviors (member functions or methods) that the objects created from the class can have.
+
+## C++ vector 
+
+Vector is the part of C++ Standard Template Library. They are used to store the elements dynamically. Vectors are STL containers that have a special feature to increase or decrease the size considering the requirement of insertion and deletion inside a program.
+
+In the case of a static array, we cannot insert elements once it is full but when the size of a vector becomes full then it doubles its size from the original. That's why it is beneficial to use a vector instead of a static array.
+ 
+In C++, a vector is similar to dynamic arrays with the ability to resize itself automatically. Vector elements are stored in contiguous memory locations so that they can be accessed and traversed using iterators.
+
+Some of the functions associated with a vector:
+
+begin(): Returns an iterator pointing to the first element in the vector.    
+end(): Returns an iterator pointing to the theoretical element that follows the last element in the vector.    
+rbegin(): Returns a reverse iterator pointing to the last element in the vector (reverse beginning). It moves from last to first element.   
+size(): Returns the number of elements in the vector.  
+empty(): Returns whether the vector is empty.    
+push_back(): It pushes the elements into a vector from the back.    
+pop_back(): It is used to pop or remove elements from a vector from the back.    
+insert(): It inserts new elements before the element at the specified position.   
+
+
+vectorname.push_back(value) is the same as append in python.  
+C++ push_back() is a pre-defined function that is used to insert data or elements at the end of the vector or it pushes the element in the vector from the back. The method is declared inside the <vector> and <bits/stdc++.h> header files.
 
 ###  Constructors in C++ 
 Constructor is a member function of a class, whose name is the same as the class name.  
@@ -20,7 +44,6 @@ The constructor initializes the member variable nodes of the Cell class with the
 The use of the initializer list : nodes(nodes) is a shorthand way of initializing the nodes member variable with the value passed as the parameter. It is a best practice to use initializer lists in constructors to initialize member variables, as it can improve performance and avoid unnecessary object copying.
 
 Overall, this constructor allows you to create a Cell object by providing a std::vector of Vertices objects, and it initializes the nodes member variable with the provided value.
-
 
 ### Code to compute the area and perimeter of a single vertex model
 
@@ -100,7 +123,7 @@ int main(){
 
 
 
-![Alt text](C:\Users\pbana\OneDrive\Documents\GitHub\TrackMyJourney\images\cell_plot.svg "a image of the cell")
+![a image of the cell](/images/cell_plotimage.png)
 
 
 ## Eigen library in c++
@@ -136,32 +159,9 @@ Now I need to make a 2D array of these but when I initialize it it won't work. B
 
 Then that row will represent a face with vertices (0,0,0) (1, 1, 1) (3, 3, 3) (4,4,4);
 
+
 !<video controls src="my_video.mp4" title="Vertex changed"></video>
 
-
-## C++ vector 
-
-vectorname.push_back(value) is the same as append in python.  
-C++ push_back() is a pre-defined function that is used to insert data or elements at the end of the vector or it pushes the element in the vector from the back. The method is declared inside the <vector> and <bits/stdc++.h> header files.
-
-Vector is the part of C++ Standard Template Library. They are used to store the elements dynamically. Vectors are STL containers that have a special feature to increase or decrease the size considering the requirement of insertion and deletion inside a program.
-
-In the case of a static array, we cannot insert elements once it is full but when the size of a vector becomes full then it doubles its size from the original. That's why it is beneficial to use a vector instead of a static array.
-
-What is Vector?
-
-In C++, a vector is similar to dynamic arrays with the ability to resize itself automatically. Vector elements are stored in contiguous memory locations so that they can be accessed and traversed using iterators.
-
-Some of the functions associated with a vector:
-
-begin(): Returns an iterator pointing to the first element in the vector. 
-end(): Returns an iterator pointing to the theoretical element that follows the last element in the vector. 
-rbegin(): Returns a reverse iterator pointing to the last element in the vector (reverse beginning). It moves from last to first element. 
-size(): Returns the number of elements in the vector. 
-empty(): Returns whether the vector is empty. 
-push_back(): It pushes the elements into a vector from the back. 
-pop_back(): It is used to pop or remove elements from a vector from the back. 
-insert(): It inserts new elements before the element at the specified position. 
 
 ## C++ pointers and &
 
