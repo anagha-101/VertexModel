@@ -1,4 +1,4 @@
-# Concepts of C++ that you must know for this project!
+# Concepts of C++ for this project!
 
 ## Object Oriented Programming - C++ Class
 A C++ class is a blueprint for creating objects. It encapsulates data for the object and methods to manipulate that data. Classes define the properties (data members) and behaviors (member functions or methods) that the objects created from the class can have.
@@ -120,13 +120,7 @@ int main(){
 
 }
 ```
-
-
-
-![a image of the cell](../images/cell_plotimage.png)
-
-## Eigen library in c++
-
+![Fig. The cell whose area and perimeter we seek](cell_plotimage.png)
 ## C++ array
 Suppose you want to store multiple values like "orange", "apple", "watermelon" to a single variable say "fruit". Then instead of declaring each of them separately as "fruit1", "fruit2", "fruit3" , we can make use of arrays.
 Arrays are used to store multiple values to a single variable, instead of declaring separate variable for each value.
@@ -150,18 +144,8 @@ cout << fruits[1];
 ```
 
 ## Cell arrays
-One use for cell arrays is storing the vertices of polygons. Each row in the cell array can represent a different polygon, and each column can represent a different vertex within that polygon. The data in the cells can then be used to draw the polygons on the screen.  
-
-Now I need to make a 2D array of these but when I initialize it it won't work. Basically each row will be a face of a polygon. And each column will contain a vertex of that row. So if one row is
-
-(0,0,0) (1, 1, 1) (3, 3, 3) (4,4,4);
-
-Then that row will represent a face with vertices (0,0,0) (1, 1, 1) (3, 3, 3) (4,4,4);
-
-
-!<video controls src="my_video.mp4" title="Vertex changed"></video>
-
-
+<video width="640" controls><src="my_video.mp4" type="video/mp4"></video>
+<video controls src="my_video.mp4" title="Title"></video>
 ## C++ pointers and &
 
 address (&) assigns the address of the variable to another and pointer (*) assigns the value of the variable to another.

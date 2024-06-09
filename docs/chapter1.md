@@ -1,10 +1,10 @@
 # Simulation of a Vertex Model of cells 
 Vertex model simulations using C++ involves modeling the mechanical interactions between cells and their vertices.
 
-1. **Vertex Model**:
+### **Vertex Model**
    Active Vertex Model (AVM) is a computational approach used to simulate the mechanical behavior of cells in a tissue. Cells are represented as polygons (typically in 2D), with vertices that can move. Vertices are connected by edges, defining the cell boundaries. The system evolves by minimizing an energy function, which includes terms for cell area, perimeter, and other properties.  
 
-2. **Cell Polarity**:
+### **Cell Polarity**
    Cell polarity refers to the intrinsic asymmetry observed in cells, either in their shape, structure or organization of cellular components. It is involved in almost all physiological and developmental processes.
 
 First, we will focus on modelling cell alignment. Here are a few annotations about collective motion that seem interesting:   
@@ -25,7 +25,7 @@ First, we will focus on modelling cell alignment. Here are a few annotations abo
 
 “Indeed, when thinking, say, of shaken elongated polar granular particles, it is likely that their inelastic collisions are rather nematic than purely polar: when colliding almost head-on, they will glide along each other rather than align.” ([Chaté et al., 2008, p. 453](zotero://select/library/items/P3P4P9UJ)) ([pdf](zotero://open-pdf/library/items/6VPI6EWX?page=4&annotation=GE7GD9XK)) 
 
-### References:
+### References
 Barton, D. L., Henkes, S., Weijer, C. J., & Sknepnek, R. (2017). Active vertex model for cell-resolution description of epithelial tissue mechanics. PLOS Computational Biology, 13(6). https://doi.org/10.1371/journal.pcbi.1005569 
 
 Fletcher, A. G., Osterfield, M., Baker, R. E., & Shvartsman, S. Y. (2014). Vertex models of epithelial morphogenesis. Biophysical journal, 106(11), 2291–2304. https://doi.org/10.1016/j.bpj.2013.11.4498
