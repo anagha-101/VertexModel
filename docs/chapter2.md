@@ -5,11 +5,9 @@ A C++ class is a blueprint for creating objects. It encapsulates data for the ob
 
 ## C++ vector 
 
-Vector is the part of C++ Standard Template Library. They are used to store the elements dynamically. Vectors are STL containers that have a special feature to increase or decrease the size considering the requirement of insertion and deletion inside a program.
+Vector is used to store the elements dynamically. In C++, a vector is similar to dynamic arrays with the ability to resize itself automatically.
 
 In the case of a static array, we cannot insert elements once it is full but when the size of a vector becomes full then it doubles its size from the original. That's why it is beneficial to use a vector instead of a static array.
- 
-In C++, a vector is similar to dynamic arrays with the ability to resize itself automatically. Vector elements are stored in contiguous memory locations so that they can be accessed and traversed using iterators.
 
 Some of the functions associated with a vector:
 
@@ -22,9 +20,7 @@ push_back(): It pushes the elements into a vector from the back.
 pop_back(): It is used to pop or remove elements from a vector from the back.    
 insert(): It inserts new elements before the element at the specified position.   
 
-
-vectorname.push_back(value) is the same as append in python.  
-C++ push_back() is a pre-defined function that is used to insert data or elements at the end of the vector or it pushes the element in the vector from the back. The method is declared inside the <vector> and <bits/stdc++.h> header files.
+vectorname.push_back(value) is the same as append in python. The method is declared inside the <vector> and <bits/stdc++.h> header files.
 
 ###  Constructors in C++ 
 Constructor is a member function of a class, whose name is the same as the class name.  
@@ -35,13 +31,40 @@ A constructor gets called automatically when we create the object of the class.
 
 Parameterized Constructors make it possible to pass arguments to constructors. Typically, these arguments help initialize an object when it is created. To create a parameterized constructor, simply add parameters to it the way you would to any other function. When you define the constructor’s body, use the parameters to initialize the object.  
 
-The selected code snippet appears to be a constructor implementation for a class called Cell. Constructors are special member functions in C++ that are used to initialize objects of a class. They are typically called when an object is created.
-
-In this case, the constructor takes a single parameter, which is a constant reference to a std::vector of Vertices objects. The std::vector is a container class in C++ that allows you to store and manipulate a dynamic array of elements.
-
-The constructor initializes the member variable nodes of the Cell class with the value passed as the parameter. The nodes member variable is likely declared somewhere in the class definition.
-
 The use of the initializer list : nodes(nodes) is a shorthand way of initializing the nodes member variable with the value passed as the parameter. It is a best practice to use initializer lists in constructors to initialize member variables, as it can improve performance and avoid unnecessary object copying.
+
+``` cpp
+#include <iostream>
+using namespace std;
+
+class Point {
+private:
+	int x;
+	int y;
+
+public:
+	Point(int i = 0, int j = 0): x(i), y(j) {}
+	/* The above use of Initializer list is optional as the
+		constructor can also be written as:
+		Point(int i = 0, int j = 0) {
+			x = i;
+			y = j;
+		}
+	*/
+
+	int getX() const { return x; }
+	int getY() const { return y; }
+};
+
+int main()
+{
+	Point t1(10, 15);
+	cout << "x = " << t1.getX() << ", ";
+	cout << "y = " << t1.getY();
+	return 0;
+}
+```
+
 
 Overall, this constructor allows you to create a Cell object by providing a std::vector of Vertices objects, and it initializes the nodes member variable with the provided value.
 
@@ -146,9 +169,10 @@ cout << fruits[1];
 ## Cell arrays
 <video width="640" controls><src="my_video.mp4" type="video/mp4"></video>
 <video controls src="my_video.mp4" title="Title"></video>
+
 ## C++ pointers and &
 
-address (&) assigns the address of the variable to another and pointer (*) assigns the value of the variable to another.
+address (&) assigns the **address** of the variable to another and pointer (*) assigns the **value** of the variable to another.
 ``` cpp
    var = 3000;
    // take the address of var
