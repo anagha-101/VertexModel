@@ -182,3 +182,61 @@ address (&) assigns the **address** of the variable to another and pointer (*) a
 ```
 
 https://www.freecodecamp.org/news/cpp-vector-how-to-initialize-a-vector-in-a-constructor/
+
+## Range-based for loop in C++
+
+Syntax : for ( init-statement(optional) range-declaration : range-expression ){ loop statement }
+
+auto specifier: 
+A placeholder type specifier designates a placeholder type that will be replaced later, typically by deduction from an initializer.  
+The placeholder auto may be accompanied by modifiers, such as const or &, which will participate in the type deduction. The placeholder decltype(auto) must be the sole constituent of the declared type
+
+An example of range based for loop:  
+```cpp
+for (const auto& vertex : nodes) {}
+```
+
+Reference: https://en.cppreference.com/w/cpp/language/range-for 
+https://en.cppreference.com/w/cpp/language/auto 
+
+## size_t
+
+A good rule of thumb is for anything that you need to compare in the loop condition against something that is naturally a std::size_t itself.
+
+std::size_t is the type of any sizeof expression and as is guaranteed to be able to express the maximum size of any object (including any array) in C++. By extension it is also guaranteed to be big enough for any array index so it is a natural type for a loop by index over an array.
+
+If you are just counting up to a number then it may be more natural to use either the type of the variable that holds that number or an int or unsigned int (if large enough) as these should be a natural size for the machine.
+
+size_t is the result type of the sizeof operator.
+
+Use size_t for variables that model size or index in an array. size_t conveys semantics: you immediately know it represents a size in bytes or an index, rather than just another integer.
+
+Also, using size_t to represent a size in bytes helps making the code portable.
+
+Reference: https://stackoverflow.com/questions/1951519/when-to-use-stdsize-t 
+
+## Solving the problem of garbage values of last two coordinates 
+The issue with the huge or unexpected values for the last coordinates likely stems from accessing elements outside the bounds of the basal_nodes and apical_nodes arrays. This is because the loop iterates from 0 to N-1, and for the last iteration (when i = N-1), the code attempts to access basal_nodes[i + 1] and apical_nodes[i + 1], which are out of bounds when i + 1 = N. Accessing elements outside the bounds of a vector in C++ leads to undefined behavior, which in this case manifests as garbage values being read.
+
+To fix this, you should ensure that the index wraps around to 0 when it reaches N, similar to how it's commented out in the code for the clockwise order of vertices. This can be achieved by using the modulo operator % with N to ensure the index stays within bounds.
+
+Here's the corrected part of the loop:
+```cpp
+// Corrected loop to ensure indices are within bounds
+for (int i = 0; i < N; i++) {
+    vector<Vertices> nodes = {
+        // Ensure wrapping with modulo operation
+        apical_nodes[i], basal_nodes[i],
+        basal_nodes[(i + 1) % N], apical_nodes[(i + 1) % N]
+    };
+    cells.push_back(Cell(nodes));
+    // print the cell vertices
+    cout << "Cell " << i + 1 << " vertices: ";
+    for (const auto& vertex : nodes) {
+        cout << "(" << vertex.x << ", " << vertex.y << ") ";
+    }
+    cout << endl;
+}
+```
+This change ensures that when i + 1 equals N, the index wraps around to 0, preventing out-of-bounds access and the resulting undefined behavior.
+
