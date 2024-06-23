@@ -1,0 +1,461 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../chapter2/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.24">
+    
+    
+      
+        <title>Chapter 1 - Modeling and Simulation in C++</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6543a935.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#simulation-of-a-vertex-model-of-cells" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Modeling and Simulation in C++" class="md-header__button md-logo" aria-label="Modeling and Simulation in C++" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Modeling and Simulation in C++
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 1
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Modeling and Simulation in C++" class="md-nav__button md-logo" aria-label="Modeling and Simulation in C++" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Modeling and Simulation in C++
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Chapter 1
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 1
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#vertex-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vertex Model
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cell-polarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cell Polarity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#vertex-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vertex Model
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cell-polarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cell Polarity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="simulation-of-a-vertex-model-of-cells">Simulation of a Vertex Model of cells</h1>
+<p>Vertex model simulations using C++ involves modeling the mechanical interactions between cells and their vertices.</p>
+<h3 id="vertex-model"><strong>Vertex Model</strong></h3>
+<p>Active Vertex Model (AVM) is a computational approach used to simulate the mechanical behavior of cells in a tissue. Cells are represented as polygons (typically in 2D), with vertices that can move. Vertices are connected by edges, defining the cell boundaries. The system evolves by minimizing an energy function, which includes terms for cell area, perimeter, and other properties.  </p>
+<h3 id="cell-polarity"><strong>Cell Polarity</strong></h3>
+<p>Cell polarity refers to the intrinsic asymmetry observed in cells, either in their shape, structure or organization of cellular components. It is involved in almost all physiological and developmental processes.</p>
+<p>First, we will focus on modelling cell alignment. Here are a few annotations about collective motion that seem interesting:   </p>
+<p>“To the physicist, they are also highly nontrivial because they occur without any leader, external field, or geometrical constraint: collective motion can then be seen as the long-range orientational order following spontaneous symmetry-breaking.” (<a href="zotero://select/library/items/P3P4P9UJ">Chaté et al., 2008, p. 451</a>) (<a href="zotero://open-pdf/library/items/6VPI6EWX?page=2&amp;annotation=G2Y7HZSS">pdf</a>)</p>
+<p>“Medical doctors try to understand tumor growth or wound healing, two situations in which cells move collectively.” (<a href="zotero://select/library/items/P3P4P9UJ">Chaté et al., 2008, p. 451</a>) (<a href="zotero://open-pdf/library/items/6VPI6EWX?page=2&amp;annotation=NPFLBEMR">pdf</a>)</p>
+<p>“It is only recently (say fifteen years ago) that physicists, in their usual abrupt manner, approached the problem of collective motion by stripping it down to simple experiments or models having in mind the spontaneous symmetry-breaking picture mentioned above.” (<a href="zotero://select/library/items/P3P4P9UJ">Chaté et al., 2008, p. 451</a>) (<a href="zotero://open-pdf/library/items/6VPI6EWX?page=2&amp;annotation=J7MXSE8B">pdf</a>)</p>
+<p>““Vicsek model” (VM)— is central because of its “minimal” character. In short, in the VM, point particles move at fixed velocity, align locally with neighbors, while being submitted to some noise. In other words, an XY model in which the spins are actively moving.” (<a href="zotero://select/library/items/P3P4P9UJ">Chaté et al., 2008, p. 451</a>) (<a href="zotero://open-pdf/library/items/6VPI6EWX?page=2&amp;annotation=6YCHDXWZ">pdf</a>)</p>
+<p>“we argue that the focal nature of the VM calls for it being extended, expanded, along three main directions in order to account for most of the different types of collective motion listed above. These are – to vary the polarity of the particles and of their interaction – to introduce a attraction/repulsion pairwise interaction to allow for cohesion – to take into account the ambient fluid in which the particles move” (<a href="zotero://select/library/items/P3P4P9UJ">Chaté et al., 2008, p. 451</a>) (<a href="zotero://open-pdf/library/items/6VPI6EWX?page=2&amp;annotation=IDKY9N8W">pdf</a>)</p>
+<p>“The two main parameters of the VM are ρ, the density of particles, and η, the noise strength. At zero noise, perfect alignment eventually settles in the whole system (at least if the particles evolve in a domain with periodic “boundary conditions). At maximum noise (η =1),particles are just non-interacting random walkers. Thus, a transition must occur in between.” ” (<a href="zotero://select/library/items/P3P4P9UJ">Chaté et al., 2008, p. 452</a>) (<a href="zotero://open-pdf/library/items/6VPI6EWX?page=3&amp;annotation=BZ4RXMDW">pdf</a>)</p>
+<p>“Vicsek-style models can also be constructed in which the symmetry of the particles differ from that of their interactions.” (<a href="zotero://select/library/items/P3P4P9UJ">Chaté et al., 2008, p. 453</a>) (<a href="zotero://open-pdf/library/items/6VPI6EWX?page=4&amp;annotation=GKQIJ6HM">pdf</a>)</p>
+<p>“Indeed, when thinking, say, of shaken elongated polar granular particles, it is likely that their inelastic collisions are rather nematic than purely polar: when colliding almost head-on, they will glide along each other rather than align.” (<a href="zotero://select/library/items/P3P4P9UJ">Chaté et al., 2008, p. 453</a>) (<a href="zotero://open-pdf/library/items/6VPI6EWX?page=4&amp;annotation=GE7GD9XK">pdf</a>) </p>
+<h3 id="references">References</h3>
+<p>Barton, D. L., Henkes, S., Weijer, C. J., &amp; Sknepnek, R. (2017). Active vertex model for cell-resolution description of epithelial tissue mechanics. PLOS Computational Biology, 13(6). https://doi.org/10.1371/journal.pcbi.1005569 </p>
+<p>Fletcher, A. G., Osterfield, M., Baker, R. E., &amp; Shvartsman, S. Y. (2014). Vertex models of epithelial morphogenesis. Biophysical journal, 106(11), 2291–2304. https://doi.org/10.1016/j.bpj.2013.11.4498</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.081f42fc.min.js"></script>
+      
+    
+  </body>
+</html>

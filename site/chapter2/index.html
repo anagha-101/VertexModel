@@ -1,0 +1,775 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../chapter1/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.24">
+    
+    
+      
+        <title>Chapter 2 - Modeling and Simulation in C++</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6543a935.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#concepts-of-c-for-this-project" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Modeling and Simulation in C++" class="md-header__button md-logo" aria-label="Modeling and Simulation in C++" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Modeling and Simulation in C++
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Modeling and Simulation in C++" class="md-nav__button md-logo" aria-label="Modeling and Simulation in C++" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Modeling and Simulation in C++
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapter1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Chapter 2
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 2
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#object-oriented-programming-c-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Object Oriented Programming - C++ Class
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      C++ vector
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C++ vector">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructors-in-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      Constructors in C++
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#code-to-compute-the-area-and-perimeter-of-a-single-vertex-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code to compute the area and perimeter of a single vertex model
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      C++ array
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cell-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cell arrays
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-pointers-and" class="md-nav__link">
+    <span class="md-ellipsis">
+      C++ pointers and &amp;
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#range-based-for-loop-in-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      Range-based for loop in C++
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#size_t" class="md-nav__link">
+    <span class="md-ellipsis">
+      size_t
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solving-the-problem-of-garbage-values-of-last-two-coordinates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solving the problem of garbage values of last two coordinates
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#object-oriented-programming-c-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Object Oriented Programming - C++ Class
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      C++ vector
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="C++ vector">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constructors-in-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      Constructors in C++
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#code-to-compute-the-area-and-perimeter-of-a-single-vertex-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code to compute the area and perimeter of a single vertex model
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-array" class="md-nav__link">
+    <span class="md-ellipsis">
+      C++ array
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cell-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cell arrays
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-pointers-and" class="md-nav__link">
+    <span class="md-ellipsis">
+      C++ pointers and &amp;
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#range-based-for-loop-in-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      Range-based for loop in C++
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#size_t" class="md-nav__link">
+    <span class="md-ellipsis">
+      size_t
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solving-the-problem-of-garbage-values-of-last-two-coordinates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solving the problem of garbage values of last two coordinates
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="concepts-of-c-for-this-project">Concepts of C++ for this project!</h1>
+<h2 id="object-oriented-programming-c-class">Object Oriented Programming - C++ Class</h2>
+<p>A C++ class is a blueprint for creating objects. It encapsulates data for the object and methods to manipulate that data. Classes define the properties (data members) and behaviors (member functions or methods) that the objects created from the class can have.</p>
+<h2 id="c-vector">C++ vector</h2>
+<p>Vector is used to store the elements dynamically. In C++, a vector is similar to dynamic arrays with the ability to resize itself automatically.</p>
+<p>In the case of a static array, we cannot insert elements once it is full but when the size of a vector becomes full then it doubles its size from the original. That's why it is beneficial to use a vector instead of a static array.</p>
+<p>Some of the functions associated with a vector:</p>
+<p>begin(): Returns an iterator pointing to the first element in the vector.  <br />
+end(): Returns an iterator pointing to the theoretical element that follows the last element in the vector.  <br />
+rbegin(): Returns a reverse iterator pointing to the last element in the vector (reverse beginning). It moves from last to first element. <br />
+size(): Returns the number of elements in the vector.<br />
+empty(): Returns whether the vector is empty.  <br />
+push_back(): It pushes the elements into a vector from the back.  <br />
+pop_back(): It is used to pop or remove elements from a vector from the back.  <br />
+insert(): It inserts new elements before the element at the specified position.   </p>
+<p>vectorname.push_back(value) is the same as append in python. The method is declared inside the <vector> and <bits/stdc++.h> header files.</p>
+<h3 id="constructors-in-c">Constructors in C++</h3>
+<p>Constructor is a member function of a class, whose name is the same as the class name.<br />
+Constructor is a special type of member function that is used to initialize the data members for an object of a class automatically when an object of the same class is created.<br />
+Constructor is invoked at the time of object creation. It constructs the values i.e. provides data for the object that is why it is known as a constructor.<br />
+Constructors do not return value, hence they do not have a return type.<br />
+A constructor gets called automatically when we create the object of the class.  </p>
+<p>Parameterized Constructors make it possible to pass arguments to constructors. Typically, these arguments help initialize an object when it is created. To create a parameterized constructor, simply add parameters to it the way you would to any other function. When you define the constructor’s body, use the parameters to initialize the object.  </p>
+<p>The use of the initializer list : nodes(nodes) is a shorthand way of initializing the nodes member variable with the value passed as the parameter. It is a best practice to use initializer lists in constructors to initialize member variables, as it can improve performance and avoid unnecessary object copying.</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+class Point {
+private:
+    int x;
+    int y;
+
+public:
+    Point(int i = 0, int j = 0): x(i), y(j) {}
+    /* The above use of Initializer list is optional as the
+        constructor can also be written as:
+        Point(int i = 0, int j = 0) {
+            x = i;
+            y = j;
+        }
+    */
+
+    int getX() const { return x; }
+    int getY() const { return y; }
+};
+
+int main()
+{
+    Point t1(10, 15);
+    cout &lt;&lt; &quot;x = &quot; &lt;&lt; t1.getX() &lt;&lt; &quot;, &quot;;
+    cout &lt;&lt; &quot;y = &quot; &lt;&lt; t1.getY();
+    return 0;
+}
+</code></pre>
+<p>Overall, this constructor allows you to create a Cell object by providing a std::vector of Vertices objects, and it initializes the nodes member variable with the provided value.</p>
+<h3 id="code-to-compute-the-area-and-perimeter-of-a-single-vertex-model">Code to compute the area and perimeter of a single vertex model</h3>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;cmath&gt;
+
+using namespace std;
+
+class Vertices{
+    public:
+    // for a 2D cell (x,y) are the vertex coordinates
+    // these are members of the class
+    double x;
+    double y;
+
+    // constructor to initialize the vertices
+    Vertices(double x1, double y1)
+    {
+    x = x1;
+    y = y1;
+    }
+
+};
+
+class Cell{
+    public:
+    // nodes is a vector of vertices
+    vector&lt;Vertices&gt;nodes;
+
+    // Shoelace's formula to calculate the area of the cell
+    double get_Area(){
+        // initialise area
+        double area = 0;
+        // loop through the vertices
+        for (int i = 0; i &lt; nodes.size(); i ++){
+            // area calculated using the Shoelace formula
+            area += nodes[i].x * nodes[(i+1) % nodes.size()].y - nodes[(i+1) % nodes.size()].x * nodes[i].y;
+        }
+        // area = abs(area) / 2;
+        // although it is intuitive to think area as positive, here this is not the case
+        area = area / 2;
+        return area;
+    }
+
+    double get_Perimeter(){
+        // initialise perimeter
+        double perimeter = 0;
+        // loop through the vertices
+        for (int i = 0; i &lt; nodes.size(); i++){
+            // find distance between vertices
+            double distance = sqrt(pow(nodes[i].x - nodes[(i+1) % nodes.size()].x, 2) + pow(nodes[i].y - nodes[(i+1) % nodes.size()].y, 2));
+            // add distance to perimeter
+            perimeter += distance;         
+        }
+        return perimeter;
+    }
+};
+// main function will create an object of the class Cell and calculate the area and perimeter
+int main(){
+    // declare an object of the class Cell
+    Cell C;
+    // assign vertices to the object
+    C.nodes = { {10, 7}, {5, 11}, {2, 8}, {2, 3},{5, 1}, {10, 4}};
+    // calculate the area
+    double area = C.get_Area();
+    // calculate the perimeter
+    double perimeter = C.get_Perimeter();
+    // print the area and perimeter
+    cout &lt;&lt; &quot;Area of the cell is: &quot; &lt;&lt; area &lt;&lt; endl;
+    cout &lt;&lt; &quot;Perimeter of the cell is: &quot; &lt;&lt; perimeter &lt;&lt; endl;
+    return 0;
+
+}
+</code></pre>
+<p><img alt="Fig. The cell whose area and perimeter we seek" src="../cell_plotimage.png" /></p>
+<h2 id="c-array">C++ array</h2>
+<p>Suppose you want to store multiple values like "orange", "apple", "watermelon" to a single variable say "fruit". Then instead of declaring each of them separately as "fruit1", "fruit2", "fruit3" , we can make use of arrays.
+Arrays are used to store multiple values to a single variable, instead of declaring separate variable for each value.</p>
+<pre><code class="language-cpp">string fruits[3] = {&quot;orange&quot;, &quot;apple&quot;, &quot;watermelon&quot;};
+\\ here 3 is the number of elements in the array
+</code></pre>
+<p>Access an element of array by referring to index number </p>
+<pre><code class="language-cpp">cout &lt;&lt; fruits[1];
+\\ Output: apple
+</code></pre>
+<p>An element can be replaced using the index number too</p>
+<pre><code class="language-cpp">fruits[1] = &quot;guava&quot;;
+cout &lt;&lt; fruits[1];
+\\ Output: guava
+</code></pre>
+<h2 id="cell-arrays">Cell arrays</h2>
+<video width="640" controls><src="my_video.mp4" type="video/mp4"></video>
+<video controls src="my_video.mp4" title="Title"></video>
+
+<h2 id="c-pointers-and">C++ pointers and &amp;</h2>
+<p>address (&amp;) assigns the <strong>address</strong> of the variable to another and pointer (<em>) assigns the </em><em>value</em>* of the variable to another.</p>
+<pre><code class="language-cpp">   var = 3000;
+   // take the address of var
+   ptr = &amp;var;
+   // take the value available at ptr
+   val = *ptr;
+</code></pre>
+<p>https://www.freecodecamp.org/news/cpp-vector-how-to-initialize-a-vector-in-a-constructor/</p>
+<h2 id="range-based-for-loop-in-c">Range-based for loop in C++</h2>
+<p>Syntax : for ( init-statement(optional) range-declaration : range-expression ){ loop statement }</p>
+<p>auto specifier: 
+A placeholder type specifier designates a placeholder type that will be replaced later, typically by deduction from an initializer.<br />
+The placeholder auto may be accompanied by modifiers, such as const or &amp;, which will participate in the type deduction. The placeholder decltype(auto) must be the sole constituent of the declared type</p>
+<p>An example of range based for loop:  </p>
+<pre><code class="language-cpp">for (const auto&amp; vertex : nodes) {}
+</code></pre>
+<p>Reference: https://en.cppreference.com/w/cpp/language/range-for 
+https://en.cppreference.com/w/cpp/language/auto </p>
+<h2 id="size_t">size_t</h2>
+<p>A good rule of thumb is for anything that you need to compare in the loop condition against something that is naturally a std::size_t itself.</p>
+<p>std::size_t is the type of any sizeof expression and as is guaranteed to be able to express the maximum size of any object (including any array) in C++. By extension it is also guaranteed to be big enough for any array index so it is a natural type for a loop by index over an array.</p>
+<p>If you are just counting up to a number then it may be more natural to use either the type of the variable that holds that number or an int or unsigned int (if large enough) as these should be a natural size for the machine.</p>
+<p>size_t is the result type of the sizeof operator.</p>
+<p>Use size_t for variables that model size or index in an array. size_t conveys semantics: you immediately know it represents a size in bytes or an index, rather than just another integer.</p>
+<p>Also, using size_t to represent a size in bytes helps making the code portable.</p>
+<p>Reference: https://stackoverflow.com/questions/1951519/when-to-use-stdsize-t </p>
+<h2 id="solving-the-problem-of-garbage-values-of-last-two-coordinates">Solving the problem of garbage values of last two coordinates</h2>
+<p>The issue with the huge or unexpected values for the last coordinates likely stems from accessing elements outside the bounds of the basal_nodes and apical_nodes arrays. This is because the loop iterates from 0 to N-1, and for the last iteration (when i = N-1), the code attempts to access basal_nodes[i + 1] and apical_nodes[i + 1], which are out of bounds when i + 1 = N. Accessing elements outside the bounds of a vector in C++ leads to undefined behavior, which in this case manifests as garbage values being read.</p>
+<p>To fix this, you should ensure that the index wraps around to 0 when it reaches N, similar to how it's commented out in the code for the clockwise order of vertices. This can be achieved by using the modulo operator % with N to ensure the index stays within bounds.</p>
+<p>Here's the corrected part of the loop:</p>
+<pre><code class="language-cpp">// Corrected loop to ensure indices are within bounds
+for (int i = 0; i &lt; N; i++) {
+    vector&lt;Vertices&gt; nodes = {
+        // Ensure wrapping with modulo operation
+        apical_nodes[i], basal_nodes[i],
+        basal_nodes[(i + 1) % N], apical_nodes[(i + 1) % N]
+    };
+    cells.push_back(Cell(nodes));
+    // print the cell vertices
+    cout &lt;&lt; &quot;Cell &quot; &lt;&lt; i + 1 &lt;&lt; &quot; vertices: &quot;;
+    for (const auto&amp; vertex : nodes) {
+        cout &lt;&lt; &quot;(&quot; &lt;&lt; vertex.x &lt;&lt; &quot;, &quot; &lt;&lt; vertex.y &lt;&lt; &quot;) &quot;;
+    }
+    cout &lt;&lt; endl;
+}
+</code></pre>
+<p>This change ensures that when i + 1 equals N, the index wraps around to 0, preventing out-of-bounds access and the resulting undefined behavior.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.081f42fc.min.js"></script>
+      
+    
+  </body>
+</html>
