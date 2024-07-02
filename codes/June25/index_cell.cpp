@@ -1,5 +1,4 @@
 // the simple code
-
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -39,6 +38,18 @@ public:
         area = area / 2;
         return area;
     }
+    // double get_Area()
+    // {
+    //     double area = 0;
+    //     int n = apical_nodes.size();
+    //     // formula to calculate area
+    //     for (int i = 0; i < n; i++) 
+    //     {
+    //         area += apical_nodes[(i + 1) % n].x * apical_nodes[i].y + basal_nodes[(i + 1) % n].x * apical_nodes[(i + 1) % n].y + basal_nodes[i].x * basal_nodes[(i + 1) % n].y + apical_nodes[i].x * basal_nodes[i].y - apical_nodes[i].x * apical_nodes[(i + 1) % n].y - apical_nodes[(i + 1) % n].x * basal_nodes[(i + 1) % n].y - basal_nodes[(i + 1) % n].x * basal_nodes[i].y - basal_nodes[i].x * apical_nodes[i].y;          
+    //     }
+    //     area = area / 2;
+    //     return area;
+    // }
 };
 
 class System 
@@ -60,7 +71,13 @@ public:
         for (int i = 0; i < xa.size(); i++)
         {
             cell.push_back(Cell());
+            // should we define each cell by i and i+1 vertices?
+            // cell[i].apical_nodes.push_back(apical_nodes[i]);
+            // cell[i].apical_nodes.push_back(apical_nodes[(i + 1) % xa.size()]);
+            // cell[i].basal_nodes.push_back(basal_nodes[i]);
+            // cell[i].basal_nodes.push_back(basal_nodes[(i + 1) % xa.size()]);
         }
+
     }
 };
 
@@ -70,7 +87,13 @@ int main()
     vector<double> xa = {1,2,3,4,5,6}, ya = {2,2,2,2,2,2}, xb = {1,2,3,4,5,6}, yb = {1,1,1,1,1,1};
 
     System S(xa,ya,xb,yb);
-    cout << "Area of a Cell: " << S.cell[2].get_Area(xa,ya,xb,yb) << endl;
+    cout << "Area of a Cell: " << S.cell[2].get_Area(xa,xb,ya,yb) << endl;
+    // changing a single vertex coordinate to see impact on nearby cell
+    // if third vertex is changed from (3,2) to (10,2) then area of cell 2 and cell 3 should change
+    xa[2] = 10;
+    System S_new(xa,ya,xb,yb);
+    cout << "Area of second Cell: " << S_new.cell[2].get_Area(xa,xb,ya,yb) << endl;
+    cout << "Area of third Cell: " << S_new.cell[3].get_Area(xa,xb,ya,yb) << endl;
+    cout << "Area of fourth Cell: " << S_new.cell[4].get_Area(xa,xb,ya,yb) << endl;
     return 0;
-
 }
