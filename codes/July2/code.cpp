@@ -56,8 +56,8 @@ int main()
     System S(xa,ya,xb,yb);
 
     // uncomment to change third cell apical coordinate
-    // S.apical_nodes[2].y = 8;
-    S.apical_nodes[1].y = 8;
+    // // S.apical_nodes[2].y = 8;
+    // S.apical_nodes[1].y = 8;
     // tension (change as required)
     double alpha_a = 1, alpha_b = 1, alpha_l = 1;
     double E_cell_edge = 0, E_cell_area = 0, E_total = 0;
