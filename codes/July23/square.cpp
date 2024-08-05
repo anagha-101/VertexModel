@@ -53,17 +53,17 @@ public:
     }
 
     // boundary condition
-    int modulateBoundary(int i, int l) {
+    int PeriodicBoundaryCondition(int i, int l) {
         if (i >= l) {
-            return i % l;
+            return (i % l) - l;
         } else if (i < 0) {
-            return (i + l) % l;
+            return ((i + l) % l) + l;
         } else {
             return i;
         }
     }
     // // boundary condition
-    // int modulateBoundary(int i, int l) {
+    // int PeriodicBoundaryCondition(int i, int l) {
     //     if (i == N + 1) {
     //         return ((i + 1) / N) % N - l;
     //     } else if (i == -1) {
